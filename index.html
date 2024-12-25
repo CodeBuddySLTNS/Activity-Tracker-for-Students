@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="/icons/fontawesome/css/brands.css" />
     <title>Activity Tracker</title>
   </head>
-  <body class="font-body">
+  <body class="font-body min-h-screen scroll-smooth">
     <header
       class="px-3.5 py-3 flex justify-between items-center shadow bg-white sticky top-0 left-0"
     >
@@ -24,7 +24,7 @@
     <main class="px-3 pb-5 mt-4 md:px-10 md:py-5">
       <form
         id="new-form"
-        class="h-0 mb-3 shadow rounded-lg overflow-hidden transition ease-out duration-700"
+        class="px-4 shadow rounded-lg overflow-hidden transition-all ease-out duration-500 h-0"
       >
         <h3 class="text-center font-medium text-lg">New Activity</h3>
         <label class="flex flex-col">
@@ -54,19 +54,27 @@
             class="w-full px-2 py-1 border border-gray-200 outline-0 rounded-md"
           />
         </label>
-        <button id="submitBtn" type="submit" class="button w-full mt-3.5 bg-green-300">
+        <button
+          id="submitBtn"
+          type="submit"
+          class="button w-full mt-3.5 bg-green-300"
+        >
           Add
         </button>
       </form>
       <div>
-        <div
-          class="w-full px-2 pb-1.5 text-center flex justify-between"
-        >
-          <p class="flex flex-col items-center">Activities: <span id="all">0</span></p>
-          <p class="flex flex-col items-center">Incomplete: <span id="incomplete" class="text-red-800">0</span></p>
-          <p class="flex flex-col items-center">Completed: <span id="complete" class="text-green-800">0</span></p>
+        <div class="w-full px-2 pb-1.5 text-center flex justify-between">
+          <p class="flex flex-col items-center">
+            Activities: <span id="all">0</span>
+          </p>
+          <p class="flex flex-col items-center">
+            Incomplete: <span id="incomplete" class="text-red-800">0</span>
+          </p>
+          <p class="flex flex-col items-center">
+            Completed: <span id="complete" class="text-green-800">0</span>
+          </p>
         </div>
-        <div id="cards" class="grid auto-rows-fr gap-2">
+        <div id="cards" class="grid auto-rows-max gap-2 md:grid-cols-2">
           <!-- Activities will be added here dynamically -->
         </div>
       </div>
@@ -79,7 +87,7 @@
         class="fa-solid fa-plus text-xl aspect-square px-3.5 py-3 border-2 border-green-500 rounded-full bg-green-100 shadow-md shadow-green-300 transition ease-out duration-500"
       ></i>
     </div>
-    
+
     <footer class="pt-1 pb-7 text-sm text-center">
       <p>@CodeBuddy SLTNS 2024</p>
       <div class="py-1 flex justify-center items-center gap-2">
@@ -88,6 +96,7 @@
         <i class="text-xl fa-brands fa-github"></i>
       </div>
     </footer>
+    <script src="node_modules/eruda/eruda.js"></script>
     <script src="./script.js"></script>
   </body>
 </html>

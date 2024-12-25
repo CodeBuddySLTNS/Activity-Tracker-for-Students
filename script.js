@@ -1,31 +1,63 @@
 const newForm = document.querySelector("#new-form");
 const toggleForm = document.querySelector("#toggle-form");
 
+// Toggle form
 toggleForm.addEventListener("click", () => {
   newForm.classList.toggle("new-form-toggler");
   toggleForm.classList.toggle("rotate-45");
+  if (newForm.classList.contains("new-form-toggler")) scrollToTop();
 });
 
-window.addEventListener("load", () => {
-  let activities = localStorage.getItem("activities");
-  activities = activities ? JSON.parse(activities) : [];
+// Get the activities from local storage
+let activities = localStorage.getItem("activities");
+activities = activities ? JSON.parse(activities) : [];
 
-  document.querySelector("#all").innerHTML = activities.length;
+// display the activities
+displayActivities();
+  
+const activityInput = document.querySelector("#activityInput");
+const descriptionInput = document.querySelector("#descriptionInput");
+const dueDateInput = document.querySelector("#dueDateInput");
 
+newForm.addEventListener("submit", e => {
+  e.preventDefault();
+  try {
+    const newActivity = {
+      activity: activityInput.value.trim(),
+      description: descriptionInput.value.trim(),
+      due: dueDateInput.value.trim(),
+      status: false
+    };
+    
+    activities.unshift(newActivity);
+    localStorage.setItem("activities", JSON.stringify(activities));
+    
+    displayActivities();
+    activityInput.value = "";
+    descriptionInput.value = "";
+    dueDateInput.value = "";
+  } catch (e) {
+    console.log(e);
+  }
+});
+
+function displayActivities() {
   if (activities.length > 0) {
+    document.querySelector("#cards").innerHTML = '';
+    document.querySelector("#all").innerHTML = activities.length;
     document.querySelector("#incomplete").innerHTML = activities.filter(
       a => !a.status
     ).length;
     document.querySelector("#complete").innerHTML = activities.filter(
       a => a.status
     ).length;
-
-    for (let activity of activities) {
+  
+    activities.forEach((activity) => {
       document.querySelector("#cards").innerHTML += `
         <div class="card">
           <h4 class="card-label-w-icon">
             ${activity.activity}
-            <i class="fa-solid fa-trash text-red-600"></i>
+            <i class="fa-solid fa-trash text-red-600" onclick="deleteActivity('${activity.activity}')"></i>
           </h4>
           <pre class="card-description">${activity.description}</pre
           >
@@ -49,34 +81,21 @@ window.addEventListener("load", () => {
           </div>
         </div>
       `;
-    }
+    });
   }
-});
 
-const activityInput = document.querySelector("#activityInput");
-const descriptionInput = document.querySelector("#descriptionInput");
-const dueDateInput = document.querySelector("#dueDateInput");
+}
 
-newForm.addEventListener("submit", e => {
-  e.preventDefault();
-  try {
-    const newActivity = {
-      activity: activityInput.value.trim(),
-      description: descriptionInput.value.trim(),
-      due: dueDateInput.value.trim(),
-      status: false
-    };
-
-    let localData = localStorage.getItem("activities");
-    localData = localData ? JSON.parse(localData) : [];
-
-    localData.push(newActivity);
-    localStorage.setItem("activities", JSON.stringify(localData));
-
-    activityInput.value = "";
-    descriptionInput.value = "";
-    dueDateInput.value = "";
-  } catch (e) {
-    console.log(e);
+function deleteActivity(activity) {
+  if (confirm(`Are you sure you want to delete ${activity.toUpperCase()}?`)) {
+    const updatedActivities = activities.filter(a => a.activity !== activity);
+    activities = updatedActivities;
+    localStorage.setItem('activities', JSON.stringify(updatedActivities));
+    displayActivities();
+    
   }
-});
+}
+
+function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+}
