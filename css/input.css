@@ -8,7 +8,7 @@
 }
 
 .card {
-  @apply p-3.5 mt-1 border border-gray-200 rounded-md shadow overflow-hidden;
+  @apply p-3.5 mt-1 border border-gray-200 rounded-md shadow overflow-hidden hover:shadow-md transition ease-out duration-200;
 }
 
 .card-label-w-icon {
@@ -20,9 +20,8 @@
 }
 
 .button {
-  @apply p-1 shadow border-gray-200 rounded-md;
+  @apply p-1 shadow border-gray-200 rounded-md transition ease-out duration-500;
 }
-
 .new-form-toggler {
-  @apply h-280 mb-3 py-4 border transition ease-linear duration-500;
+  @apply h-280 mb-3 py-4 border;
 }
