@@ -8,7 +8,10 @@ module.exports = {
       },
       height: {
         '280': '280px'
-      }
+      },
+      fontSize: {
+        tt: ['1.2rem', { lineHeight: '1rem' }],
+      },
     }
   },
   plugins: []
