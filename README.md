@@ -1,1 +1,1 @@
-## CodeBuddy Solutions
+CodeBuddy Solutions
