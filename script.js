@@ -4,7 +4,7 @@ const activityInput = document.querySelector("#activityInput");
 const descriptionInput = document.querySelector("#descriptionInput");
 const dueDateInput = document.querySelector("#dueDateInput");
 
-eruda.init();
+// eruda.init();
 
 // Toggle form
 toggleForm.addEventListener("click", () => {
